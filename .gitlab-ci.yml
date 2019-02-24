@@ -1,0 +1,10 @@
+image: docker
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+  - docker build -t profteam/deployer .
+    docker push profteam/deployer
