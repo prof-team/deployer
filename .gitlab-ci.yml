@@ -8,5 +8,6 @@ build:
   before_script:
     - docker login -u $DOCKER_LOGIN -p$DOCKER_PASS
   script:
-  - docker build -t profteam/deployer .
-  - docker push profteam/deployer
+    - if [ "$CI_COMMIT_REF_NAME" = "master" ]; then TAG="latest"; else TAG=$CI_COMMIT_REF_NAME; fi
+    - docker build -t profteam/deployer:$TAG .
+    - docker push profteam/deployer:$TAG
